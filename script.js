@@ -215,8 +215,6 @@ async function startGame() {
     wordIsvalid(gameWord)
     } while (!wordIsvalid(gameWord))
   }
-
-  
   
   createUserKeyboard();
 }
@@ -233,6 +231,58 @@ function gameWin(innerHTML) {
   })
   gameOver = true;
   setTimeout(() => alert("Você acertou! 😁"), 10)
+}
+
+
+function wrongLetter (keyProps, keyButton_el) {
+  keyProps.hasWord = false;
+  //desabilita e pinta de vermelho
+  keyButton_el.classList.add("btn-failed", "disabled");
+  qntErros++;
+
+  //baseado na quantidade de erro, partes do boneco são reveladas
+  if (!gameOver) {
+    switch (qntErros) {
+      case 1:
+        document.querySelector("#head").style.display = 'block';
+        break;
+      case 2:
+        document.querySelector("#core").style.display = 'block';
+        break;
+      case 3:
+        document.querySelector("#right-arm").style.display = 'block';
+        break;
+      case 4:
+        document.querySelector("#left-arm").style.display = 'block';
+        break;
+      case 5:
+        document.querySelector("#left-leg").style.display = 'block';
+        break;
+      case 6:
+        //perdeu
+        document.querySelector(".forca").innerHTML = gameOver_svg;
+        gameOver = true;
+        setTimeout(() => {
+          alert(`Você Errou! 😥 a palavra era ${gameWord}`)
+        }, 10)
+        break;
+    }
+  }
+}
+
+function rightLetter(keyProps, keyButton_el, word_el, keyboard_el) {
+  keyProps.hasWord = true;
+  //desabilita o botão e pinta de verde
+  keyButton_el.classList.add("btn-success", "disabled");
+
+  //revela todas a letra na palavra
+  revealedGameWord = revealedWordEx(gameWord);
+  word_el.textContent = revealedGameWord;
+
+  //Se a parte revelada da palavra não possuir _ significa que todas as letras foram encontradas antes dele perder o jogo
+  if (!revealedGameWord.includes("_")) {
+    gameWin(keyboard_el.innerHTML)
+  }
 }
 
 function createUserKeyboard() {
@@ -256,92 +306,26 @@ function createUserKeyboard() {
       keyProps.pressed = true;
       //Verifica se a tecla pressoada existe na palavra
       if (gameWord.includes(keyProps.key)) {
-
-
-
-
         //acertou a letra
-        keyProps.hasWord = true;
-        //desabilita o botão e pinta de verde
-        keyButton_el.classList.add("btn-success", "disabled");
+        rightLetter(keyProps, keyButton_el, word_el, keyboard_el)
 
-        //revela todas a letra na palavra
-        revealedGameWord = revealedWordEx(gameWord);
-        word_el.textContent = revealedGameWord;
+      } else {
+          //Primeiro verifica se a palavra tem acento e se a keyProps.key é uma vogal
+          if (/[ÁÀÂÃÉÈÍÏÓÔÕÖÚ]/g.test(gameWord) && /[AEIOU]/g.test(keyProps.key)) {
+            //Depois roda um match puxando da constante handleLetterAccent os acentos que aquela vogal pode ter, retornando do match um array com essas letras acentoadas
+            const correspondingAccentLetters = gameWord.match(handleLetterAccent[keyProps.key]);
 
-        //Se a parte revelada da palavra não possuir _ significa que todas as letras foram encontradas antes dele perder o jogo
-        if (!revealedGameWord.includes("_")) {
-          gameWin(keyboard_el.innerHTML)
-        }
-
-
-
-
-
-      } else if(/[ÁÀÂÃÉÈÍÏÓÔÕÖÚ]/g.test(gameWord)) {
-          if (/[AEIOU]/g.test(keyProps.key)) {
-          const correspondingAccentLetters = gameWord.match(handleLetterAccent[keyProps.key]);
-
-          if (correspondingAccentLetters) {
-
-
-
-
-
-            //acertou a letra
-            keyProps.hasWord = true;
-            //desabilita o botão e pinta de verde
-            keyButton_el.classList.add("btn-success", "disabled");
-
-            //revela todas a letra na palavra
-            revealedGameWord = revealedWordEx(gameWord);
-            word_el.textContent = revealedGameWord;
-
-            //Se a parte revelada da palavra não possuir _ significa que todas as letras foram encontradas antes dele perder o jogo
-            if (!revealedGameWord.includes("_")) {
-              gameWin(keyboard_el.innerHTML)
+            //verifica se retornou alguma letra, se sim, é porque tem aquela key, se não, é um chute incorreto
+            if (correspondingAccentLetters) {
+              //acertou a letra
+              rightLetter(keyProps, keyButton_el, word_el, keyboard_el);
+            } else {
+              wrongLetter(keyProps, keyButton_el);
             }
 
-
-
-
-          }
-        }
-      
-      } else {
-        //errou a letra
-        keyProps.hasWord = false;
-        //desabilita e pinta de vermelho
-        keyButton_el.classList.add("btn-failed", "disabled");
-        qntErros++;
-
-        //baseado na quantidade de erro, partes do boneco são reveladas
-        if (!gameOver) {
-          switch (qntErros) {
-            case 1:
-              document.querySelector("#head").style.display = 'block';
-              break;
-            case 2:
-              document.querySelector("#core").style.display = 'block';
-              break;
-            case 3:
-              document.querySelector("#right-arm").style.display = 'block';
-              break;
-            case 4:
-              document.querySelector("#left-arm").style.display = 'block';
-              break;
-            case 5:
-              document.querySelector("#left-leg").style.display = 'block';
-              break;
-            case 6:
-              //perdeu
-              document.querySelector(".forca").innerHTML = gameOver_svg;
-              gameOver = true;
-              setTimeout(() => {
-                alert(`Você Errou! 😥 a palavra era ${gameWord}`)
-              }, 10)
-              break;
-          }
+        } else {
+          //errou a letra
+          wrongLetter(keyProps, keyButton_el);
         }
       }
     };
