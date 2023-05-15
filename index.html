@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Forca</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <section class="jogo_da_forca">
+    <div class="forca">
+      <svg style="width: 200px;" stroke-linecap="round" viewBox="0 0 400 400">
+        <g fill="none" stroke="#b7b7b7" stroke-width="10">
+          <path id="core" d="M296.7 144.6v112"></path>
+          <path id="left-arm" d="M295.5 179.7c-12 0-23.4 0-35-1.7-4.7-.7-9.7-.7-14-3-4-2.2-6-6.5-8.5-9"></path>
+          <path id="right-arm" d="M296.3 179.6c13.7 0 27.5 2.8 41.2 1.4 7-.7 18.5-6.4 25.2-10.4"></path>
+          <path id="left-leg" d="M295.5 256.5c-5.7 10.4-29 23.4-31.8 25.7-4 3-17 23.3-19.6 26-1.3 1.4-4 1-7.4 1"></path>
+        </g>
+        <g id="gallows">
+          <path
+            d="M297 71v46.7M290.5 101.2L297 99l6.7-2.2M290.5 108.6l6.6-2.2 6.7-2.2M290.5 116l6.6-2.3 6.7-2.2M284.5 155.3c-7-7-7-18 0-25l12.6-12.6 12.6 12.5c7 7 7 18.2 0 25-3.4 3.6-8 5.3-12.5 5.3s-9-1.7-12.5-5.2z"
+            fill="none" stroke="#f7b239" stroke-width="5.8"></path>
+          <path d="M217.2 73.2L197.5 93l-76.8 76.7v-42L155.5 93 175.2 73h42z" fill="#b27214"></path>
+          <path d="M39 27h35.5v46.2H39z" fill="#b27214"></path>
+          <path d="M55.6 27h19v46.2h-19z" fill="#995c0d"></path>
+          <path d="M338 27v46.2H120.6V27H338z" fill="#b27214"></path>
+          <path d="M217.2 73.2L197.5 93h-42L175.2 73h42z" fill="#995c0d"></path>
+          <path d="M120.7 169.7v223H74.5V7.3h46.2v162.3z" fill="#b27214"></path>
+          <path d="M388 388c0-3-2.8-5.8-6-5.8H18c-3.2 0-6 2.7-6 6 0 3 2.8 5.8 6 5.8h364c3.2 0 6-2.7 6-6z"
+            fill="#8b5e24">
+          </path>
+        </g>
+        <g id="Layer1">
+          <circle id="head" cx="297.1" cy="121.4" fill="#b7b7b7" r="28.5"></circle>
+        </g>
+      </svg>
+    </div>
+    <h1 class="word"></h1>
+  </section>
+
+
+  <div class="keyboard"></div>
+
+  <div class="btnContainer">
+    <button class="gameBtn" onclick="document.location.reload(true)">Jogar novamente</button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,117 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+.jogo_da_forca {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.forca {
+  max-width: 200px;
+}
+
+.word {
+  
+  letter-spacing: 18px;
+}
+
+.keyboard {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.btn {
+  width: 40px;
+  height: 40px;
+  margin: 4px 4px;
+  border-radius: 6px;
+}
+
+.btn-secondary {
+  border: 1px solid rgb(192, 190, 190);
+  cursor: pointer;
+  background-color: rgb(253, 253, 254);
+  transition: 0.3s all;
+}
+
+.btn-secondary:hover {
+  background-color: rgb(236, 236, 238);
+}
+
+.btn-success {
+  color: white;
+  background-color: rgb(57, 175, 10);
+}
+
+.btn-failed {
+  color: white;
+  background-color: rgb(209, 92, 92);
+}
+
+.disabled {
+  cursor: auto;
+  opacity: 0.95;
+}
+
+.disabled.btn-secondary:hover {
+  background-color: inherit;
+}
+
+#core, #left-arm, #right-arm, #left-leg, #head {
+  display: none;
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.gameBtn {
+  padding: 16px;
+  background-color: rgb(72, 212, 37);
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.gameBtn:hover {
+  background-color: rgb(56, 182, 25);
+  transition: 0.3s ease-out;
+}
+
