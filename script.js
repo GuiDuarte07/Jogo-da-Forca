@@ -198,7 +198,7 @@ async function startGame() {
   revealedGameWord = '';
   gameWord = '';
   
-  const randomSecretWord = confirm('Você deseja que uma palavra seja sorteada? (caso selecione "cancelar" você irá escrever a palavra que deseja jogar');
+  const randomSecretWord = confirm('Você deseja que uma palavra seja sorteada? (caso selecione "cancelar" você irá escrever a palavra que deseja jogar)');
   if (randomSecretWord) {
     //fazendo um fetch para buscar o arquivo de palavras e depois convertendo para json na mesma linha
     let wordArray = await (await fetch("palavras.json")).json();
