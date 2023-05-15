@@ -302,7 +302,8 @@ function createUserKeyboard() {
     keyButton_el.onclick = (e) => {
       e.target.classList.remove("btn-secondary");
       /* const keyValue = keyButton_el.textContent; */
-
+      if (keyProps.pressed) return;
+      
       keyProps.pressed = true;
       //Verifica se a tecla pressoada existe na palavra
       if (gameWord.includes(keyProps.key)) {
